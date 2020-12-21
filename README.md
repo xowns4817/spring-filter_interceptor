@@ -154,7 +154,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowedMethods("GET", "POST")
     }
     ```
-    - 특정 컨트롤러에만 cors를 처리하려면 @@crossorigin를 붙여준다.
+    - 특정 컨트롤러에만 cors를 처리하려면 @crossorigin를 붙여준다.
     ```java
      @CrossOrigin
      @RestController
@@ -166,6 +166,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
      }
    }
 ```
-    
    
    
