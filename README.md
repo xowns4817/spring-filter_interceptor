@@ -9,7 +9,7 @@
  - @WebFilter 에너테이션 필터 등록
 
 // TestFilter.java
-- 아래 코드에서는 urlPatterns를 "*"로 했으므로 모든 Filter를 거친다. 특정 urlPattern만 거치게 하고 싶으면 해당 값에 추가한다. ( 만약, urlPattern="/aaa/*" 라고 설정했다면 해당 서버로 들어오는
+- 아래 코드에서는 urlPatterns를 "*"로 했으므로 모든 요청 Filter를 거친다. 특정 urlPattern만 거치게 하고 싶으면 url 패턴을 추가한다. ( 만약, urlPattern="/aaa/*" 라고 설정했다면 해당 서버로 들어오는
 url 패턴중 "/aaa"의 패턴만 Filter를 거치게 된다. 즉, "/aaa" 요청은 Filter를 타고 controller로 전달이 되고, 다른 요청들은 Filter를 안타고 Controller로 전달이 된다.
 - 만약, 특정 ip를 차단하고 싶다면 @WebFilter에 모든 요청을 허용하고 (@WebFilter(urlPatterns="*")) doFilter에서 인자로 들어오는 servletRequest를 통해 ip를 알아내서 dofilter에서 ip를 걸러주면 될거 같다.
 
