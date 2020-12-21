@@ -61,8 +61,8 @@ public class DemoApplication {
   
   - HandlerInterceptor 구현한다. ( preHandle, postHandle, afterCompletion )
   - preHandle는 컨트롤러 진입전, view 랜더링 전, afterCompletion는 view 랜더링 후에 호출된다. ( 주로 세션체크를 위해 preHandle만 사용해봄 )
-  ```
-  @Component
+  ```java
+@Component
 public class TestInterceptor implements HandlerInterceptor {
 
     /**
@@ -133,6 +133,40 @@ public class WebMvcConfig implements WebMvcConfigurer {
   
 
 ### 추가적으로 WebMvcConfigurer 인터페이스의 메소드 설명
- - addInterceptors
  - addResourceHandlers
+   - 정적인 리소스를 호스팅할때 설정해준다.
+   - 아래 코드는 "/test/*"로 요청이 들어오면 "/resource/views/"안에서 리소스를 찾는다.
+   ```java
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/test/**")  // /test/** 로 요청을 받으면 /views/** 의 값으로 응답을 한다.
+                .addResourceLocations("classpath:/views/");
+    }
+   ```
+   
  - addCorsMappings
+   - 서버에서 cors설정을 전역으로 할때 사용한다.
+   ```java
+    // global cors
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**") // 모든 요청에 대해서
+                .allowedOrigins("*") // 허용할 origin 리스트 ( 모두 허용 )
+                .allowedMethods("GET", "POST")
+    }
+    ```
+    - 특정 컨트롤러에만 cors를 처리하려면 @@crossorigin를 붙여준다.
+    ```java
+     @CrossOrigin
+     @RestController
+     public class TestFilterController {
+
+     @GetMapping("/filter")
+     public void filter_test( ) {
+         log.info("filter_test");
+     }
+   }
+```
+    
+   
+   
